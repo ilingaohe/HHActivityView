@@ -1,0 +1,203 @@
+//
+//  ShareContentView.m
+//  HHActivityViewKit
+//
+//  Created by lingaohe on 12/20/13.
+//  Copyright (c) 2013 ilingaohe. All rights reserved.
+//
+
+#import "ShareContentView.h"
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+#define HEIGHT_OF_CANCELBTN 20.0f
+
+@interface ShareContentView ()
+@property (nonatomic, strong) NSArray *shareItemCells;
+@end
+
+@implementation ShareContentView
+
+- (instancetype)initWithShareItemCells:(NSArray *)shareItemCells
+{
+  if (self = [super init]) {
+    self.shareItemCells = shareItemCells;
+    [self setupView];
+    [self setupNotification];
+  }
+  return self;
+}
+- (void)dealloc
+{
+  [self removeNotification];
+}
+#pragma mark -- UIView
+- (void)setupView
+{
+  //
+  UIScrollView *containerView = [self productContainerView];
+  //
+  UIButton *cancelBtn = [self productCancelBtn];
+  cancelBtn.center = CGPointMake(self.bounds.size.width/2.0f, self.bounds.size.height - cancelBtn.frame.size.height/2.0f - 10.0f);
+  //
+  [self addSubview:containerView];
+  [self addSubview:cancelBtn];
+}
+- (UIScrollView *)productContainerView
+{
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+    //iOS7.0及以上系统，使用单行布局
+    return [self productContainerViewWithFlowLayout];
+  }else{
+    //iOS7.0之前的系统，使用九宫格布局
+    return [self productContainerViewWithGridLayout];
+  }
+}
+- (UIScrollView *)productContainerViewWithFlowLayout
+{
+  //单行方式的布局
+  CGFloat margin = 10.0f;
+  CGFloat itemCellWidth = SHAREITEMCELL_WIDTH;
+  CGFloat itemCellHeight = SHAREITEMCELL_HEIGHT;
+  CGFloat height = itemCellHeight + HEIGHT_OF_CANCELBTN + margin * 2;
+  self.frame = CGRectMake(0, 0, [self currentScreenViewWidth], height);
+  //
+  UIScrollView *containerView = [[UIScrollView alloc] initWithFrame:self.bounds];
+  CGFloat contentSizeWidth = SHAREITEMCELL_WIDTH * self.shareItemCells.count + margin * (self.shareItemCells.count + 1);
+  containerView.contentSize = CGSizeMake(contentSizeWidth, containerView.frame.size.height);
+  //
+  for (int index=0; index<self.shareItemCells.count; index++) {
+    ShareItemCell *itemCell = [self.shareItemCells objectAtIndex:index];
+    CGFloat centerX = margin + itemCellWidth/2.0f + (itemCellWidth + margin) * index;
+    CGFloat centerY = itemCell.frame.size.height/2.0f;
+    itemCell.center = CGPointMake(centerX, centerY);
+    [containerView addSubview:itemCell];
+  }
+  return containerView;
+}
+- (UIScrollView *)productContainerViewWithGridLayout
+{
+  UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    return [self productContainerViewWithGridLayoutForPortraitOrientation];
+  }else if (UIInterfaceOrientationIsLandscape(orientation)){
+    return [self productContainerViewWithGridLayoutForLandscapeOrientation];
+  }else{
+    //默认也走竖屏
+    return [self productContainerViewWithGridLayoutForPortraitOrientation];
+  }
+}
+- (UIScrollView *)productContainerViewWithGridLayoutForLandscapeOrientation
+{
+  //横屏方式的九宫格，每行6个排布，最多2行，多了的话，左右滑动
+  int maxColumns = 6;
+  int maxRows = 2;
+  CGFloat itemCellWidth = SHAREITEMCELL_WIDTH;
+  CGFloat itemCellHeight = SHAREITEMCELL_HEIGHT;
+  CGFloat viewWidth = [self currentScreenViewWidth];
+  CGFloat margin = (viewWidth - itemCellWidth*maxColumns)/(maxColumns+1);
+  CGFloat viewHeight = itemCellHeight * maxRows + HEIGHT_OF_CANCELBTN + 10 * 2;
+  self.frame = CGRectMake(0, 0, viewWidth, viewHeight);
+  //
+  UIScrollView *containerView = [[UIScrollView alloc] initWithFrame:self.bounds];
+  containerView.contentSize = CGSizeMake(containerView.frame.size.width, containerView.frame.size.height);
+  //
+  for (int index=0; index<self.shareItemCells.count; index++) {
+    int row = index / maxColumns;
+    int column = index % maxColumns;
+    ShareItemCell *itemCell = [self.shareItemCells objectAtIndex:index];
+    CGFloat centerX = margin + itemCellWidth/2.0f + (itemCellWidth + margin) * column;
+    CGFloat centerY = itemCellHeight/2.0f + row * itemCellHeight;
+    itemCell.center = CGPointMake(centerX, centerY);
+    [containerView addSubview:itemCell];
+  }
+  return containerView;
+}
+- (UIScrollView *)productContainerViewWithGridLayoutForPortraitOrientation
+{
+  //竖屏方式的九宫格，每行4个排布，最多三行，多了的话，左右滑动
+  int maxColumns = 4;
+  int maxRows = 3;
+  CGFloat itemCellWidth = SHAREITEMCELL_WIDTH;
+  CGFloat itemCellHeight = SHAREITEMCELL_HEIGHT;
+  CGFloat viewWidth = [self currentScreenViewWidth];
+  CGFloat margin = (viewWidth - itemCellWidth*maxColumns)/(maxColumns+1);
+  CGFloat viewHeight = itemCellHeight * maxRows + HEIGHT_OF_CANCELBTN + 10 * 2;
+  self.frame = CGRectMake(0, 0, viewWidth, viewHeight);
+  //
+  UIScrollView *containerView = [[UIScrollView alloc] initWithFrame:self.bounds];
+  containerView.contentSize = CGSizeMake(containerView.frame.size.width, containerView.frame.size.height);
+  //
+  for (int index=0; index<self.shareItemCells.count; index++) {
+    int row = index / maxColumns;
+    int column = index % maxColumns;
+    ShareItemCell *itemCell = [self.shareItemCells objectAtIndex:index];
+    CGFloat centerX = margin + itemCellWidth/2.0f + (itemCellWidth + margin) * column;
+    CGFloat centerY = itemCellHeight/2.0f + row * itemCellHeight;
+    itemCell.center = CGPointMake(centerX, centerY);
+    [containerView addSubview:itemCell];
+  }
+  return containerView;
+}
+- (UIButton *)productCancelBtn
+{
+  UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+  cancelBtn.frame = CGRectMake(0, 0, 300, HEIGHT_OF_CANCELBTN);
+  cancelBtn.backgroundColor = [UIColor redColor];
+  [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+  [cancelBtn addTarget:self action:@selector(handleCancelBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+  return cancelBtn;
+}
+//根据当前屏幕转向的不同，返回不同的宽度
+- (CGFloat)currentScreenViewWidth
+{
+  CGSize screenSize = [UIScreen mainScreen].bounds.size;
+  UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    return screenSize.width;
+  }else if (UIInterfaceOrientationIsLandscape(orientation)){
+    return screenSize.height;
+  }else{
+    //默认也走竖屏
+    return screenSize.width;
+  }
+}
+- (void)layoutSubviews
+{
+  [super layoutSubviews];
+  NSLog(@"%s",__FUNCTION__);
+}
+#pragma mark -- UIAction
+- (void)handleCancelBtnAction:(id)sender
+{
+  if (self.cancelAction) {
+    self.cancelAction();
+  }
+}
+#pragma mark -- Notification
+- (void)setupNotification
+{
+  [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationChangeNotification:) name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+- (void)removeNotification
+{
+  [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)handleDeviceOrientationChangeNotification:(NSNotification *)notification
+{
+  NSLog(@"%s",__FUNCTION__);
+  UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//  UIDeviceOrientation deveiceOrientation = [[UIDevice currentDevice] orientation];
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    NSLog(@"Portrait");
+  }else if (UIInterfaceOrientationIsLandscape(orientation)){
+    NSLog(@"Landscape");
+  }else{
+    //默认也走竖屏
+    NSLog(@"Portrait");
+  }
+  //
+}
+@end

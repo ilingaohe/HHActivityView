@@ -33,8 +33,13 @@
     _contentView = contentView;
     [self addSubview:contentView];
     [self setupData];
+    [self setupNotification];
   }
   return self;
+}
+- (void)dealloc
+{
+  [self removeNotification];
 }
 #pragma mark -- Private
 - (void)show
@@ -84,7 +89,9 @@
 - (void)setupView
 {
   //调整位置
-  self.backgroundColor = [UIColor clearColor];
+  self.backgroundColor = [UIColor grayColor];
+  self.alpha = 0.5f;
+  self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
   if (self.maskType == HHAnimationMaskSuperView) {
     //需要覆盖SuperView,只对contentView进行动画
     self.frame = self.superview.bounds;
@@ -113,6 +120,11 @@
 {
   //开始动画
   [self.animationView animationSlideOutWithDirection:self.animationDirection duration:DURATION_OF_ANIMATION delegate:self startSelector:nil stopSelector:@selector(dismissCompletion)];
+}
+- (void)layoutSubviews
+{
+  [super layoutSubviews];
+  NSLog(@"%s",__FUNCTION__);
 }
 #pragma mark -- Public
 - (void)setupAnimationType:(HHAnimationType)animationType direction:(HHAnimationDirection)direction
@@ -149,5 +161,32 @@
     }
     [self dismissCompletion];
   }
+}
+#pragma mark -- Notification
+- (void)setupNotification
+{
+  [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationChangeNotification:) name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+- (void)removeNotification
+{
+  [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+- (void)handleDeviceOrientationChangeNotification:(NSNotification *)notification
+{
+  NSLog(@"%s",__FUNCTION__);
+  UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+  //  UIDeviceOrientation deveiceOrientation = [[UIDevice currentDevice] orientation];
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    NSLog(@"Portrait");
+  }else if (UIInterfaceOrientationIsLandscape(orientation)){
+    NSLog(@"Landscape");
+  }else{
+    //默认也走竖屏
+    NSLog(@"Portrait");
+  }
+  //
+  [self dismissViewAnimated:NO];
 }
 @end
