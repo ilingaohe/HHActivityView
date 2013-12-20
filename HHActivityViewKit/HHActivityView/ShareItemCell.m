@@ -30,13 +30,15 @@
 {
   self.frame = CGRectMake(0, 0, SHAREITEMCELL_WIDTH, SHAREITEMCELL_HEIGHT);
   //
-  UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 60)];
+  UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 50, 50)];
   imageView.backgroundColor = [UIColor redColor];
   imageView.image = self.image;
   //
   UILabel *titleView = [[UILabel alloc] initWithFrame:CGRectMake(0, 60, 60, 20)];
   titleView.textAlignment = NSTextAlignmentCenter;
-  titleView.backgroundColor = [UIColor greenColor];
+  titleView.backgroundColor = [UIColor clearColor];
+  titleView.font = [UIFont systemFontOfSize:8.0f];
+  titleView.numberOfLines = 2;
   titleView.text = self.title;
   //
   UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];

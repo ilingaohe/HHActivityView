@@ -10,7 +10,7 @@
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
-#define HEIGHT_OF_CANCELBTN 20.0f
+#define HEIGHT_OF_CANCELBTN 30.0f
 
 @interface ShareContentView ()
 @property (nonatomic, strong) NSArray *shareItemCells;
@@ -34,6 +34,7 @@
 #pragma mark -- UIView
 - (void)setupView
 {
+  self.backgroundColor = [UIColor grayColor];
   //
   UIScrollView *containerView = [self productContainerView];
   //
@@ -45,13 +46,14 @@
 }
 - (UIScrollView *)productContainerView
 {
-  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-    //iOS7.0及以上系统，使用单行布局
-    return [self productContainerViewWithFlowLayout];
-  }else{
-    //iOS7.0之前的系统，使用九宫格布局
-    return [self productContainerViewWithGridLayout];
-  }
+//  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+//    //iOS7.0及以上系统，使用单行布局
+//    return [self productContainerViewWithFlowLayout];
+//  }else{
+//    //iOS7.0之前的系统，使用九宫格布局
+//    return [self productContainerViewWithGridLayout];
+//  }
+  return [self productContainerViewWithGridLayout];
 }
 - (UIScrollView *)productContainerViewWithFlowLayout
 {
@@ -143,7 +145,8 @@
 {
   UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
   cancelBtn.frame = CGRectMake(0, 0, 300, HEIGHT_OF_CANCELBTN);
-  cancelBtn.backgroundColor = [UIColor redColor];
+  cancelBtn.backgroundColor = [UIColor grayColor];
+  cancelBtn.alpha = 0.8f;
   [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
   [cancelBtn addTarget:self action:@selector(handleCancelBtnAction:) forControlEvents:UIControlEventTouchUpInside];
   return cancelBtn;

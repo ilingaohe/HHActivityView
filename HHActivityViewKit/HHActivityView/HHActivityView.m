@@ -89,8 +89,7 @@
 - (void)setupView
 {
   //调整位置
-  self.backgroundColor = [UIColor grayColor];
-  self.alpha = 0.5f;
+  self.backgroundColor = [UIColor clearColor];
   self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
   if (self.maskType == HHAnimationMaskSuperView) {
     //需要覆盖SuperView,只对contentView进行动画
@@ -105,6 +104,8 @@
   //设置TapDismiss背景
   if (self.tapDismiss) {
     UIButton *tapBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    tapBtn.backgroundColor = [UIColor grayColor];
+    tapBtn.alpha = 0.5f;
     [tapBtn addTarget:self action:@selector(handleTapDismissBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [tapBtn setFrame:self.bounds];
     [self addSubview:tapBtn];
