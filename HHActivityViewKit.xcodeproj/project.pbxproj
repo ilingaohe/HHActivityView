@@ -20,6 +20,9 @@
 		C01C2A961862D36600B2CB70 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C01C2A941862D36600B2CB70 /* InfoPlist.strings */; };
 		C01C2A981862D36600B2CB70 /* HHActivityViewKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C01C2A971862D36600B2CB70 /* HHActivityViewKitTests.m */; };
 		C01C2AA31862D3CA00B2CB70 /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C01C2AA21862D3CA00B2CB70 /* DemoViewController.m */; };
+		C01C2AA71862D4BC00B2CB70 /* HHActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = C01C2AA61862D4BC00B2CB70 /* HHActivityView.m */; };
+		C01C2AEA1862DF3800B2CB70 /* HHAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C01C2AE91862DF3800B2CB70 /* HHAnimationFactory.m */; };
+		C01C2AED1862DF5C00B2CB70 /* UIView+HHAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C01C2AEC1862DF5C00B2CB70 /* UIView+HHAnimation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,12 @@
 		C01C2A971862D36600B2CB70 /* HHActivityViewKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HHActivityViewKitTests.m; sourceTree = "<group>"; };
 		C01C2AA11862D3CA00B2CB70 /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		C01C2AA21862D3CA00B2CB70 /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		C01C2AA51862D4BC00B2CB70 /* HHActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHActivityView.h; sourceTree = "<group>"; };
+		C01C2AA61862D4BC00B2CB70 /* HHActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHActivityView.m; sourceTree = "<group>"; };
+		C01C2AE81862DF3800B2CB70 /* HHAnimationFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HHAnimationFactory.h; sourceTree = "<group>"; };
+		C01C2AE91862DF3800B2CB70 /* HHAnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAnimationFactory.m; sourceTree = "<group>"; };
+		C01C2AEB1862DF5C00B2CB70 /* UIView+HHAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HHAnimation.h"; sourceTree = "<group>"; };
+		C01C2AEC1862DF5C00B2CB70 /* UIView+HHAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HHAnimation.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,10 +122,10 @@
 				C01C2AA41862D3E700B2CB70 /* HHActivityView */,
 				C01C2A811862D36600B2CB70 /* AppDelegate.h */,
 				C01C2A821862D36600B2CB70 /* AppDelegate.m */,
-				C01C2A841862D36600B2CB70 /* Images.xcassets */,
-				C01C2A791862D36600B2CB70 /* Supporting Files */,
 				C01C2AA11862D3CA00B2CB70 /* DemoViewController.h */,
 				C01C2AA21862D3CA00B2CB70 /* DemoViewController.m */,
+				C01C2A841862D36600B2CB70 /* Images.xcassets */,
+				C01C2A791862D36600B2CB70 /* Supporting Files */,
 			);
 			path = HHActivityViewKit;
 			sourceTree = "<group>";
@@ -153,6 +162,12 @@
 		C01C2AA41862D3E700B2CB70 /* HHActivityView */ = {
 			isa = PBXGroup;
 			children = (
+				C01C2AA51862D4BC00B2CB70 /* HHActivityView.h */,
+				C01C2AA61862D4BC00B2CB70 /* HHActivityView.m */,
+				C01C2AE81862DF3800B2CB70 /* HHAnimationFactory.h */,
+				C01C2AE91862DF3800B2CB70 /* HHAnimationFactory.m */,
+				C01C2AEB1862DF5C00B2CB70 /* UIView+HHAnimation.h */,
+				C01C2AEC1862DF5C00B2CB70 /* UIView+HHAnimation.m */,
 			);
 			path = HHActivityView;
 			sourceTree = "<group>";
@@ -255,6 +270,9 @@
 				C01C2AA31862D3CA00B2CB70 /* DemoViewController.m in Sources */,
 				C01C2A831862D36600B2CB70 /* AppDelegate.m in Sources */,
 				C01C2A7F1862D36600B2CB70 /* main.m in Sources */,
+				C01C2AED1862DF5C00B2CB70 /* UIView+HHAnimation.m in Sources */,
+				C01C2AA71862D4BC00B2CB70 /* HHActivityView.m in Sources */,
+				C01C2AEA1862DF3800B2CB70 /* HHAnimationFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
