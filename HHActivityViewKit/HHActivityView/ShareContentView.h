@@ -11,7 +11,8 @@
 
 @interface ShareContentView : UIView
 @property (nonatomic, copy) ShareAction cancelAction;
+@property (nonatomic, copy) ShareAction willSelectAction;
+@property (nonatomic, copy) ShareAction didSelectAction;
 
 - (instancetype)initWithShareItemCells:(NSArray *)shareItemCells;
-
 @end

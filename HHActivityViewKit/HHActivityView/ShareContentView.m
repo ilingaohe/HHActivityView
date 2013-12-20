@@ -179,6 +179,8 @@
 {
   [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationChangeNotification:) name:UIDeviceOrientationDidChangeNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleShareItemWillSelectNotification:) name:NOTIFICATION_SHAREITEM_WILL_SELECT object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleShareItemDidSelectNotification:) name:NOTIFICATION_SHAREITEM_DID_SELECT object:nil];
 }
 - (void)removeNotification
 {
@@ -199,5 +201,17 @@
     NSLog(@"Portrait");
   }
   //
+}
+- (void)handleShareItemWillSelectNotification:(NSNotification *)notification
+{
+  if (self.willSelectAction) {
+    self.willSelectAction();
+  }
+}
+- (void)handleShareItemDidSelectNotification:(NSNotification *)notification
+{
+  if (self.didSelectAction) {
+    self.didSelectAction();
+  }
 }
 @end

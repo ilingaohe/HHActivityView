@@ -51,8 +51,10 @@
 #pragma mark -- UIAction
 - (void)handleShareBtnAction:(id)sender
 {
+  [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHAREITEM_WILL_SELECT object:nil];
   if (self.shareAction) {
     self.shareAction();
   }
+  [[NSNotificationCenter defaultCenter] postNotificationName:NOTIFICATION_SHAREITEM_DID_SELECT object:nil];
 }
 @end
