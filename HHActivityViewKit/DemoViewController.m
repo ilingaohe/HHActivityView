@@ -52,12 +52,48 @@
   [btn addTarget:self action:@selector(handleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
   [self.view addSubview:btn];
 }
+- (UIImage *)fetchImageAtIndex:(NSUInteger)index
+{
+  UIImage *image = [UIImage imageNamed:@"share_netdisk"];
+  switch (index) {
+    case 0:
+      image = [UIImage imageNamed:@"share_netdisk"];
+      break;
+    case 1:
+      image = [UIImage imageNamed:@"share_link"];
+      break;
+    case 2:
+      image = [UIImage imageNamed:@"share_sms"];
+      break;
+    case 3:
+      image = [UIImage imageNamed:@"share_mail"];
+      break;
+    case 4:
+      image = [UIImage imageNamed:@"share_weibosina"];
+      break;
+    case 5:
+      image = [UIImage imageNamed:@"share_weibotencent"];
+      break;
+    case 6:
+      image = [UIImage imageNamed:@"share_renren"];
+      break;
+    case 7:
+      image = [UIImage imageNamed:@"share_weixintimeline"];
+      break;
+    case 8:
+      image = [UIImage imageNamed:@"share_weixinsession"];
+      break;
+    default:
+      break;
+  }
+  return image;
+}
 - (void)handleBtnAction:(id)sender
 {
   //
   NSMutableArray *shareItemCells = [NSMutableArray array];
   for (int index=0; index<9; index++) {
-    ShareItemCell *itemOne = [[ShareItemCell alloc] initWithImage:nil title:[NSString stringWithFormat:@"%d",index]];
+    ShareItemCell *itemOne = [[ShareItemCell alloc] initWithImage:[self fetchImageAtIndex:index] title:[NSString stringWithFormat:@"%d",index]];
     itemOne.shareAction = ^{
       NSLog(@"%d",index);
     };

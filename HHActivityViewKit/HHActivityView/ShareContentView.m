@@ -7,6 +7,7 @@
 //
 
 #import "ShareContentView.h"
+#import "FXBlurView.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -35,6 +36,11 @@
 - (void)setupView
 {
   self.backgroundColor = [UIColor grayColor];
+  //BlurBg
+  FXBlurView *blurView = [[FXBlurView alloc] initWithFrame:self.bounds];
+  blurView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+  blurView.dynamic = YES;
+  [self addSubview:blurView];
   //
   UIScrollView *containerView = [self productContainerView];
   //

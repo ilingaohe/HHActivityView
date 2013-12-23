@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C003EF55186813FA002536D0 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = C003EF54186813FA002536D0 /* FXBlurView.m */; };
 		C01C2A731862D36600B2CB70 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C01C2A721862D36600B2CB70 /* Foundation.framework */; };
 		C01C2A751862D36600B2CB70 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C01C2A741862D36600B2CB70 /* CoreGraphics.framework */; };
 		C01C2A771862D36600B2CB70 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C01C2A761862D36600B2CB70 /* UIKit.framework */; };
@@ -23,6 +24,8 @@
 		C01C2AA71862D4BC00B2CB70 /* HHActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = C01C2AA61862D4BC00B2CB70 /* HHActivityView.m */; };
 		C01C2AEA1862DF3800B2CB70 /* HHAnimationFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = C01C2AE91862DF3800B2CB70 /* HHAnimationFactory.m */; };
 		C01C2AED1862DF5C00B2CB70 /* UIView+HHAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C01C2AEC1862DF5C00B2CB70 /* UIView+HHAnimation.m */; };
+		C05075671863E98B0026D031 /* ShareContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C05075661863E98B0026D031 /* ShareContentView.m */; };
+		C050756A1863E9D90026D031 /* ShareItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C05075691863E9D90026D031 /* ShareItemCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C003EF53186813FA002536D0 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		C003EF54186813FA002536D0 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
 		C01C2A6F1862D36600B2CB70 /* HHActivityViewKit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHActivityViewKit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C01C2A721862D36600B2CB70 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C01C2A741862D36600B2CB70 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -60,6 +65,10 @@
 		C01C2AE91862DF3800B2CB70 /* HHAnimationFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HHAnimationFactory.m; sourceTree = "<group>"; };
 		C01C2AEB1862DF5C00B2CB70 /* UIView+HHAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HHAnimation.h"; sourceTree = "<group>"; };
 		C01C2AEC1862DF5C00B2CB70 /* UIView+HHAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HHAnimation.m"; sourceTree = "<group>"; };
+		C05075651863E98B0026D031 /* ShareContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareContentView.h; sourceTree = "<group>"; };
+		C05075661863E98B0026D031 /* ShareContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareContentView.m; sourceTree = "<group>"; };
+		C05075681863E9D90026D031 /* ShareItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareItemCell.h; sourceTree = "<group>"; };
+		C05075691863E9D90026D031 /* ShareItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareItemCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +95,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C003EF52186813FA002536D0 /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				C003EF53186813FA002536D0 /* FXBlurView.h */,
+				C003EF54186813FA002536D0 /* FXBlurView.m */,
+			);
+			path = FXBlurView;
+			sourceTree = "<group>";
+		};
 		C01C2A661862D36600B2CB70 = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +137,7 @@
 		C01C2A781862D36600B2CB70 /* HHActivityViewKit */ = {
 			isa = PBXGroup;
 			children = (
+				C003EF52186813FA002536D0 /* FXBlurView */,
 				C01C2AA41862D3E700B2CB70 /* HHActivityView */,
 				C01C2A811862D36600B2CB70 /* AppDelegate.h */,
 				C01C2A821862D36600B2CB70 /* AppDelegate.m */,
@@ -168,6 +187,10 @@
 				C01C2AE91862DF3800B2CB70 /* HHAnimationFactory.m */,
 				C01C2AEB1862DF5C00B2CB70 /* UIView+HHAnimation.h */,
 				C01C2AEC1862DF5C00B2CB70 /* UIView+HHAnimation.m */,
+				C05075651863E98B0026D031 /* ShareContentView.h */,
+				C05075661863E98B0026D031 /* ShareContentView.m */,
+				C05075681863E9D90026D031 /* ShareItemCell.h */,
+				C05075691863E9D90026D031 /* ShareItemCell.m */,
 			);
 			path = HHActivityView;
 			sourceTree = "<group>";
@@ -268,11 +291,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C01C2AA31862D3CA00B2CB70 /* DemoViewController.m in Sources */,
+				C05075671863E98B0026D031 /* ShareContentView.m in Sources */,
 				C01C2A831862D36600B2CB70 /* AppDelegate.m in Sources */,
 				C01C2A7F1862D36600B2CB70 /* main.m in Sources */,
+				C050756A1863E9D90026D031 /* ShareItemCell.m in Sources */,
 				C01C2AED1862DF5C00B2CB70 /* UIView+HHAnimation.m in Sources */,
 				C01C2AA71862D4BC00B2CB70 /* HHActivityView.m in Sources */,
 				C01C2AEA1862DF3800B2CB70 /* HHAnimationFactory.m in Sources */,
+				C003EF55186813FA002536D0 /* FXBlurView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
