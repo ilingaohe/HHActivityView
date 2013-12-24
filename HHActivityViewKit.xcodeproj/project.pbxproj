@@ -26,6 +26,7 @@
 		C01C2AED1862DF5C00B2CB70 /* UIView+HHAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = C01C2AEC1862DF5C00B2CB70 /* UIView+HHAnimation.m */; };
 		C05075671863E98B0026D031 /* ShareContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = C05075661863E98B0026D031 /* ShareContentView.m */; };
 		C050756A1863E9D90026D031 /* ShareItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C05075691863E9D90026D031 /* ShareItemCell.m */; };
+		C062A56D1869BE3800FEE958 /* UIImage+HHBlur.m in Sources */ = {isa = PBXBuildFile; fileRef = C062A56C1869BE3800FEE958 /* UIImage+HHBlur.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,8 @@
 		C05075661863E98B0026D031 /* ShareContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareContentView.m; sourceTree = "<group>"; };
 		C05075681863E9D90026D031 /* ShareItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareItemCell.h; sourceTree = "<group>"; };
 		C05075691863E9D90026D031 /* ShareItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareItemCell.m; sourceTree = "<group>"; };
+		C062A56B1869BE3800FEE958 /* UIImage+HHBlur.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HHBlur.h"; sourceTree = "<group>"; };
+		C062A56C1869BE3800FEE958 /* UIImage+HHBlur.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HHBlur.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,8 @@
 				C05075661863E98B0026D031 /* ShareContentView.m */,
 				C05075681863E9D90026D031 /* ShareItemCell.h */,
 				C05075691863E9D90026D031 /* ShareItemCell.m */,
+				C062A56B1869BE3800FEE958 /* UIImage+HHBlur.h */,
+				C062A56C1869BE3800FEE958 /* UIImage+HHBlur.m */,
 			);
 			path = HHActivityView;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 				C050756A1863E9D90026D031 /* ShareItemCell.m in Sources */,
 				C01C2AED1862DF5C00B2CB70 /* UIView+HHAnimation.m in Sources */,
 				C01C2AA71862D4BC00B2CB70 /* HHActivityView.m in Sources */,
+				C062A56D1869BE3800FEE958 /* UIImage+HHBlur.m in Sources */,
 				C01C2AEA1862DF3800B2CB70 /* HHAnimationFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

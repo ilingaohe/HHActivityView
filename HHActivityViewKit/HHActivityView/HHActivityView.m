@@ -8,6 +8,7 @@
 
 #import "HHActivityView.h"
 #import "UIView+HHAnimation.h"  
+#import "UIImage+HHBlur.h"
 
 //Define
 //Duration
@@ -63,6 +64,9 @@
 {
   [self removeFromSuperview];
 }
+- (void)showCompletion
+{
+}
 #pragma mark -- UIAction
 - (void)handleTapDismissBtnAction:(id)sender
 {
@@ -89,6 +93,13 @@
 #pragma mark -- UIView
 - (void)setupView
 {
+  //获取背景图
+  UIImage *superViewBgImage = [self.superview captureScreenShot];
+  UIImage *croppedImage = [superViewBgImage croppedImageAtFrame:self.contentView.frame];
+  UIImage *blurImage = [croppedImage applyLightEffect];
+  UIImageView *bgImageView = [[UIImageView alloc] initWithImage:blurImage];
+  [self.contentView addSubview:bgImageView];
+  [self.contentView sendSubviewToBack:bgImageView];
   //调整位置
   self.backgroundColor = [UIColor clearColor];
   self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -118,7 +129,7 @@
 - (void)setupAnimationIn
 {
   //开始动画
-  [self.animationView animationSlideInWithDirection:self.animationDirection duration:DURATION_OF_ANIMATION];
+  [self.animationView animationSlideInWithDirection:self.animationDirection duration:DURATION_OF_ANIMATION delegate:self startSelector:nil stopSelector:@selector(showCompletion)];
 }
 - (void)setupAnimationOut
 {
