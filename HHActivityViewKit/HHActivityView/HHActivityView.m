@@ -20,7 +20,8 @@
 @property (nonatomic, assign) HHAnimationType animationType;
 @property (nonatomic, assign) HHAnimationDirection animationDirection;
 @property (nonatomic, assign) HHAnimationMaskType maskType;
-@property (nonatomic, strong) UIView *animationView;
+@property (nonatomic, weak) UIView *animationView;
+@property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
 @end
 
 @implementation HHActivityView
@@ -111,6 +112,8 @@
     [self addSubview:tapBtn];
     [self sendSubviewToBack:tapBtn];
   }
+  //记录当前转向
+  self.interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
 }
 - (void)setupAnimationIn
 {
@@ -188,6 +191,11 @@
     NSLog(@"Portrait");
   }
   //
-  [self dismissViewAnimated:NO];
+  NSLog(@"InterfaceOrientation,Previous:%d,Current:%d",self.interfaceOrientation, orientation);
+  if (self.interfaceOrientation != orientation) {
+    self.interfaceOrientation = orientation;
+    //
+    [self dismissViewAnimated:NO];
+  }
 }
 @end

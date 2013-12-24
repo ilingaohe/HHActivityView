@@ -7,14 +7,15 @@
 //
 
 #import "ShareContentView.h"
-#import "FXBlurView.h"
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
-#define HEIGHT_OF_CANCELBTN 30.0f
+#define HEIGHT_OF_CANCELBTN 50.0f
 
 @interface ShareContentView ()
 @property (nonatomic, strong) NSArray *shareItemCells;
+@property (nonatomic, assign) UIDeviceOrientation deviceOrientation;
+@property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
 @end
 
 @implementation ShareContentView
@@ -35,12 +36,7 @@
 #pragma mark -- UIView
 - (void)setupView
 {
-  self.backgroundColor = [UIColor grayColor];
-  //BlurBg
-  FXBlurView *blurView = [[FXBlurView alloc] initWithFrame:self.bounds];
-  blurView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-  blurView.dynamic = YES;
-  [self addSubview:blurView];
+  self.backgroundColor = [UIColor clearColor];
   //
   UIScrollView *containerView = [self productContainerView];
   //
@@ -49,6 +45,10 @@
   //
   [self addSubview:containerView];
   [self addSubview:cancelBtn];
+  //记录当前转向
+  self.deviceOrientation = [[UIDevice currentDevice] orientation];
+  self.interfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+  
 }
 - (UIScrollView *)productContainerView
 {
@@ -104,7 +104,7 @@
   CGFloat itemCellHeight = SHAREITEMCELL_HEIGHT;
   CGFloat viewWidth = [self currentScreenViewWidth];
   CGFloat margin = (viewWidth - itemCellWidth*maxColumns)/(maxColumns+1);
-  CGFloat viewHeight = itemCellHeight * maxRows + HEIGHT_OF_CANCELBTN + 10 * 2;
+  CGFloat viewHeight = itemCellHeight * maxRows + HEIGHT_OF_CANCELBTN + margin * 2;
   self.frame = CGRectMake(0, 0, viewWidth, viewHeight);
   //
   UIScrollView *containerView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -130,7 +130,7 @@
   CGFloat itemCellHeight = SHAREITEMCELL_HEIGHT;
   CGFloat viewWidth = [self currentScreenViewWidth];
   CGFloat margin = (viewWidth - itemCellWidth*maxColumns)/(maxColumns+1);
-  CGFloat viewHeight = itemCellHeight * maxRows + HEIGHT_OF_CANCELBTN + 10 * 2;
+  CGFloat viewHeight = itemCellHeight * maxRows + HEIGHT_OF_CANCELBTN + margin * 2;
   self.frame = CGRectMake(0, 0, viewWidth, viewHeight);
   //
   UIScrollView *containerView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -150,10 +150,13 @@
 - (UIButton *)productCancelBtn
 {
   UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-  cancelBtn.frame = CGRectMake(0, 0, 300, HEIGHT_OF_CANCELBTN);
+  cancelBtn.frame = CGRectMake(0, 0, [self currentScreenViewWidth]-20.0f, HEIGHT_OF_CANCELBTN);
   cancelBtn.backgroundColor = [UIColor grayColor];
   cancelBtn.alpha = 0.8f;
   [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+  [cancelBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+  [cancelBtn setBackgroundImage:[[UIImage imageNamed:@"share_cancel_btn_n"] stretchableImageWithLeftCapWidth:5 topCapHeight:20] forState:UIControlStateNormal];
+  [cancelBtn setBackgroundImage:[[UIImage imageNamed:@"share_cancel_btn_h"] stretchableImageWithLeftCapWidth:5 topCapHeight:20] forState:UIControlStateHighlighted];
   [cancelBtn addTarget:self action:@selector(handleCancelBtnAction:) forControlEvents:UIControlEventTouchUpInside];
   return cancelBtn;
 }
@@ -200,7 +203,7 @@
 {
   NSLog(@"%s",__FUNCTION__);
   UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-//  UIDeviceOrientation deveiceOrientation = [[UIDevice currentDevice] orientation];
+  UIDeviceOrientation deviceOrientation = [[UIDevice currentDevice] orientation];
   if (UIInterfaceOrientationIsPortrait(orientation)) {
     NSLog(@"Portrait");
   }else if (UIInterfaceOrientationIsLandscape(orientation)){
@@ -210,6 +213,10 @@
     NSLog(@"Portrait");
   }
   //
+  NSLog(@"InterfaceOrientation,Previous:%d,Current:%d",self.interfaceOrientation, orientation);
+  NSLog(@"DeviceOrientation,Previous:%d,Current:%d",self.deviceOrientation, deviceOrientation);
+  self.interfaceOrientation = orientation;
+  self.deviceOrientation = deviceOrientation;
 }
 - (void)handleShareItemWillSelectNotification:(NSNotification *)notification
 {

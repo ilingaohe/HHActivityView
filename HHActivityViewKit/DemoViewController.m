@@ -40,12 +40,17 @@
 - (BOOL)shouldAutorotate
 {
   NSLog(@"%s",__FUNCTION__);
-//  [self.activityView dismissViewAnimated:NO];
   return YES;
 }
 #pragma mark --
 - (void)setupView
 {
+  //
+  UIImageView *bgImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+  bgImageView.image = [UIImage imageNamed:@"Default.png"];
+  bgImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+  [self.view addSubview:bgImageView];
+  //
   UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
   btn.frame = CGRectMake(100, 100, 120, 60);
   btn.backgroundColor = [UIColor redColor];
@@ -101,16 +106,19 @@
   }
   //
   ShareContentView *contentView = [[ShareContentView alloc] initWithShareItemCells:shareItemCells];
-  contentView.cancelAction = ^{
-    NSLog(@"Cancel");
-  };
-  contentView.backgroundColor = [UIColor grayColor];
+  contentView.backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.8f];
   contentView.center = CGPointMake([self currentScreenViewWidth]/2.0f, [self currentScreenViewHeight]-contentView.frame.size.height/2.0f);
   //
   HHActivityView *activityView = [[HHActivityView alloc] initWithContentView:contentView];
   [activityView setupAnimationType:HHAnimationTypeSlide direction:HHAnimationDirectionBottom];
-  [activityView showInView:self.view tapDismiss:YES];
-  self.activityView = activityView;
+  __weak HHActivityView *weakActivityView = activityView;
+  contentView.cancelAction = ^{
+    NSLog(@"Cancel");
+    [weakActivityView dismissViewAnimated:YES];
+  };
+  __weak UIView *showView = self.view;
+  [activityView showInView:showView tapDismiss:YES];
+//  self.activityView = activityView;
 }
 //根据当前屏幕转向的不同，返回不同的宽度
 - (CGFloat)currentScreenViewWidth
