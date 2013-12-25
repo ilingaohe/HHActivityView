@@ -72,6 +72,17 @@
 {
   [self dismiss];
 }
+- (void)handleTapBtnTouchDownAction:(id)sender
+{
+  SEL shouldDismissViewSelector = sel_registerName("shouldDismissView");
+  if ([self.contentView respondsToSelector:shouldDismissViewSelector]) {
+//    [self.contentView performSelector:shouldDismissViewSelector withObject:nil];
+    //使用以下方式替换警告
+    IMP imp = [self.contentView methodForSelector:shouldDismissViewSelector];
+    void (*func)(id, SEL) = (void *)imp;
+    func(self.contentView, shouldDismissViewSelector);
+  }
+}
 #pragma mark -- NSTimer
 - (void)handleDismissTimer:(NSTimer *)timer
 {
@@ -118,6 +129,7 @@
     UIButton *tapBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     tapBtn.backgroundColor = [UIColor grayColor];
     tapBtn.alpha = 0.5f;
+    [tapBtn addTarget:self action:@selector(handleTapBtnTouchDownAction:) forControlEvents:UIControlEventTouchDown];
     [tapBtn addTarget:self action:@selector(handleTapDismissBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [tapBtn setFrame:self.bounds];
     [self addSubview:tapBtn];

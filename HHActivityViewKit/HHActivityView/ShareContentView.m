@@ -11,6 +11,7 @@
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 #define HEIGHT_OF_CANCELBTN 50.0f
+#define TAG_OF_CANCEL_BTN 1001
 
 @interface ShareContentView ()
 @property (nonatomic, strong) NSArray *shareItemCells;
@@ -39,8 +40,11 @@
   self.backgroundColor = [UIColor clearColor];
   //
   UIScrollView *containerView = [self productContainerView];
+  containerView.showsHorizontalScrollIndicator = NO;
+  containerView.showsVerticalScrollIndicator = NO;
   //
   UIButton *cancelBtn = [self productCancelBtn];
+  cancelBtn.tag = TAG_OF_CANCEL_BTN;
   cancelBtn.center = CGPointMake(self.bounds.size.width/2.0f, self.bounds.size.height - cancelBtn.frame.size.height/2.0f - 10.0f);
   //
   [self addSubview:containerView];
@@ -185,6 +189,12 @@
   if (self.cancelAction) {
     self.cancelAction();
   }
+}
+#pragma mark -- Public
+- (void)shouldDismissView
+{
+  UIButton *cancelBtn = (UIButton *)[self viewWithTag:TAG_OF_CANCEL_BTN];
+  [cancelBtn setHighlighted:YES];
 }
 #pragma mark -- Notification
 - (void)setupNotification

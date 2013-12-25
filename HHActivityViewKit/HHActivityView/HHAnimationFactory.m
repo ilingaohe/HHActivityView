@@ -90,7 +90,12 @@
   if (animationDelegate && animationStartSelector) {
     SEL startSelector = NSSelectorFromString(animationStartSelector);
     if ([animationDelegate respondsToSelector:startSelector]) {
-      [animationDelegate performSelector:startSelector withObject:nil];
+      //
+//      [animationDelegate performSelector:startSelector withObject:nil];
+      //使用以下方式替换警告
+      IMP imp = [animationDelegate methodForSelector:startSelector];
+      void (*func)(id, SEL) = (void *)imp;
+      func(animationDelegate, startSelector);
     }
   }
 }
@@ -102,7 +107,11 @@
   if (animationDelegate && animationStopSelector) {
     SEL stopSelector = NSSelectorFromString(animationStopSelector);
     if ([animationDelegate respondsToSelector:stopSelector]) {
-      [animationDelegate performSelector:stopSelector withObject:nil];
+        //使用以下方式替换警告
+//      [animationDelegate performSelector:stopSelector withObject:nil];
+      IMP imp = [animationDelegate methodForSelector:stopSelector];
+      void (*func)(id, SEL) = (void *)imp;
+      func(animationDelegate, stopSelector);
     }
   }
 }
