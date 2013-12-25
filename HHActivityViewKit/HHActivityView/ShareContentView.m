@@ -154,7 +154,7 @@
 - (UIButton *)productCancelBtn
 {
   UIButton *cancelBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-  cancelBtn.frame = CGRectMake(0, 0, [self currentScreenViewWidth]-20.0f, HEIGHT_OF_CANCELBTN);
+  cancelBtn.frame = CGRectMake(0, 0, [self currentScreenViewWidth]-0.0f, HEIGHT_OF_CANCELBTN);
   cancelBtn.backgroundColor = [UIColor grayColor];
   cancelBtn.alpha = 0.8f;
   [cancelBtn setTitle:@"取消" forState:UIControlStateNormal];

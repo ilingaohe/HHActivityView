@@ -111,6 +111,11 @@
   UIImageView *bgImageView = [[UIImageView alloc] initWithImage:blurImage];
   [self.contentView addSubview:bgImageView];
   [self.contentView sendSubviewToBack:bgImageView];
+  //
+  self.contentView.layer.shadowColor = [UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:0.5f].CGColor;
+  self.contentView.layer.shadowRadius = 2.0f;
+  self.contentView.layer.shadowOpacity = 0.8f;
+  self.contentView.layer.shadowOffset = CGSizeMake(0, -4.0f);
   //调整位置
   self.backgroundColor = [UIColor clearColor];
   self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;

@@ -13,6 +13,7 @@
 - (UIImage *)captureScreenShot;
 @end
 @interface UIImage (HHBlur)
++ (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size;
 -(UIImage *)croppedImageAtFrame:(CGRect)frame;
 - (UIImage *)applyLightEffect;
 @end

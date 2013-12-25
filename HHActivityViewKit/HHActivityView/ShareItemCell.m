@@ -7,6 +7,7 @@
 //
 
 #import "ShareItemCell.h"
+#import "UIImage+HHBlur.h"
 
 @interface ShareItemCell ()
 @property (nonatomic, strong) UIImage *image;
@@ -37,14 +38,19 @@
   UILabel *titleView = [[UILabel alloc] initWithFrame:CGRectMake(0, 70, 60, 20)];
   titleView.textAlignment = NSTextAlignmentCenter;
   titleView.backgroundColor = [UIColor clearColor];
-  titleView.font = [UIFont systemFontOfSize:8.0f];
+  titleView.font = [UIFont systemFontOfSize:10.0f];
   titleView.numberOfLines = 2;
   titleView.text = self.title;
   //
+  UIColor *maskColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5];
+  UIImage *maskImage = [UIImage imageWithColor:maskColor size:imageView.bounds.size];
+  //
   UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-  shareBtn.frame = self.bounds;
-  shareBtn.backgroundColor = [UIColor clearColor];
+  shareBtn.frame = imageView.frame;
+  [shareBtn setImage:maskImage forState:UIControlStateHighlighted];
   [shareBtn addTarget:self action:@selector(handleShareBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+  shareBtn.layer.cornerRadius = 5.0f;
+  shareBtn.layer.masksToBounds = YES;
   //
   [self addSubview:imageView];
   [self addSubview:titleView];

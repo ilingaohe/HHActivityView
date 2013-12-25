@@ -106,7 +106,6 @@
   }
   //
   ShareContentView *contentView = [[ShareContentView alloc] initWithShareItemCells:shareItemCells];
-  contentView.backgroundColor = [UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.8f];
   contentView.center = CGPointMake([self currentScreenViewWidth]/2.0f, [self currentScreenViewHeight]-contentView.frame.size.height/2.0f);
   //
   HHActivityView *activityView = [[HHActivityView alloc] initWithContentView:contentView];
@@ -115,6 +114,12 @@
   contentView.cancelAction = ^{
     NSLog(@"Cancel");
     [weakActivityView dismissViewAnimated:YES];
+  };
+  contentView.willSelectAction = ^{
+    [weakActivityView dismissViewAnimated:YES];
+  };
+  contentView.didSelectAction = ^{
+  
   };
   __weak UIView *showView = self.view;
   [activityView showInView:showView tapDismiss:YES];
