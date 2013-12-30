@@ -45,7 +45,7 @@
   //
   UIButton *cancelBtn = [self productCancelBtn];
   cancelBtn.tag = TAG_OF_CANCEL_BTN;
-  cancelBtn.center = CGPointMake(self.bounds.size.width/2.0f, self.bounds.size.height - cancelBtn.frame.size.height/2.0f - 10.0f);
+  cancelBtn.center = CGPointMake(self.bounds.size.width/2.0f, self.bounds.size.height - cancelBtn.frame.size.height/2.0f);
   //
   [self addSubview:containerView];
   [self addSubview:cancelBtn];
@@ -71,7 +71,7 @@
   CGFloat margin = 10.0f;
   CGFloat itemCellWidth = SHAREITEMCELL_WIDTH;
   CGFloat itemCellHeight = SHAREITEMCELL_HEIGHT;
-  CGFloat height = itemCellHeight + HEIGHT_OF_CANCELBTN + margin * 2;
+  CGFloat height = itemCellHeight + HEIGHT_OF_CANCELBTN + margin * 1;
   self.frame = CGRectMake(0, 0, [self currentScreenViewWidth], height);
   //
   UIScrollView *containerView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -108,7 +108,7 @@
   CGFloat itemCellHeight = SHAREITEMCELL_HEIGHT;
   CGFloat viewWidth = [self currentScreenViewWidth];
   CGFloat margin = (viewWidth - itemCellWidth*maxColumns)/(maxColumns+1);
-  CGFloat viewHeight = itemCellHeight * maxRows + HEIGHT_OF_CANCELBTN + margin * 2;
+  CGFloat viewHeight = itemCellHeight * maxRows + HEIGHT_OF_CANCELBTN + margin * 1;
   self.frame = CGRectMake(0, 0, viewWidth, viewHeight);
   //
   UIScrollView *containerView = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -134,7 +134,7 @@
   CGFloat itemCellHeight = SHAREITEMCELL_HEIGHT;
   CGFloat viewWidth = [self currentScreenViewWidth];
   CGFloat margin = (viewWidth - itemCellWidth*maxColumns)/(maxColumns+1);
-  CGFloat viewHeight = itemCellHeight * maxRows + HEIGHT_OF_CANCELBTN + margin * 2;
+  CGFloat viewHeight = itemCellHeight * maxRows + HEIGHT_OF_CANCELBTN + margin * 1;
   self.frame = CGRectMake(0, 0, viewWidth, viewHeight);
   //
   UIScrollView *containerView = [[UIScrollView alloc] initWithFrame:self.bounds];

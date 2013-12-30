@@ -13,6 +13,7 @@
 //Define
 //Duration
 #define DURATION_OF_ANIMATION 0.3
+#define TAG_OF_BG_BTN 2001
 
 @interface HHActivityView ()
 @property (nonatomic, strong) UIView *contentView;
@@ -112,10 +113,10 @@
   [self.contentView addSubview:bgImageView];
   [self.contentView sendSubviewToBack:bgImageView];
   //
-  self.contentView.layer.shadowColor = [UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:0.5f].CGColor;
-  self.contentView.layer.shadowRadius = 2.0f;
-  self.contentView.layer.shadowOpacity = 0.8f;
-  self.contentView.layer.shadowOffset = CGSizeMake(0, -4.0f);
+//  self.contentView.layer.shadowColor = [UIColor colorWithRed:0.5f green:0.5f blue:0.5f alpha:0.5f].CGColor;
+//  self.contentView.layer.shadowRadius = 2.0f;
+//  self.contentView.layer.shadowOpacity = 0.8f;
+//  self.contentView.layer.shadowOffset = CGSizeMake(0, -4.0f);
   //调整位置
   self.backgroundColor = [UIColor clearColor];
   self.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -132,11 +133,12 @@
   //设置TapDismiss背景
   if (self.tapDismiss) {
     UIButton *tapBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    tapBtn.backgroundColor = [UIColor grayColor];
-    tapBtn.alpha = 0.5f;
+    tapBtn.backgroundColor = [UIColor blackColor];
+    tapBtn.alpha = 0.0f;
     [tapBtn addTarget:self action:@selector(handleTapBtnTouchDownAction:) forControlEvents:UIControlEventTouchDown];
     [tapBtn addTarget:self action:@selector(handleTapDismissBtnAction:) forControlEvents:UIControlEventTouchUpInside];
     [tapBtn setFrame:self.bounds];
+    tapBtn.tag = TAG_OF_BG_BTN;
     [self addSubview:tapBtn];
     [self sendSubviewToBack:tapBtn];
   }
@@ -147,11 +149,23 @@
 {
   //开始动画
   [self.animationView animationSlideInWithDirection:self.animationDirection duration:DURATION_OF_ANIMATION delegate:self startSelector:nil stopSelector:@selector(showCompletion)];
+  //背景透明度的动画
+  UIButton *tapBtn = (UIButton *)[self viewWithTag:TAG_OF_BG_BTN];
+  tapBtn.alpha = 0.0f;
+  [UIView animateWithDuration:DURATION_OF_ANIMATION animations:^{
+    tapBtn.alpha = 0.6f;
+  }];
 }
 - (void)setupAnimationOut
 {
   //开始动画
   [self.animationView animationSlideOutWithDirection:self.animationDirection duration:DURATION_OF_ANIMATION delegate:self startSelector:nil stopSelector:@selector(dismissCompletion)];
+  //背景透明度的动画
+  UIButton *tapBtn = (UIButton *)[self viewWithTag:TAG_OF_BG_BTN];
+  tapBtn.alpha = 0.6f;
+  [UIView animateWithDuration:DURATION_OF_ANIMATION animations:^{
+    tapBtn.alpha = 0.0f;
+  }];
 }
 - (void)layoutSubviews
 {
