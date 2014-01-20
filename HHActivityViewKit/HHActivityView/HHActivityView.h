@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "HHAnimationFactory.h"
 
+//Define
+#define NOTIFICATION_OF_AVTIVITY_VIEW_DISMISS @"NOTIFICATION_OF_AVTIVITY_VIEW_DISMISS"
+//
 typedef NS_ENUM(NSInteger, HHAnimationMaskType) {
   HHAnimationMaskSuperView,
   HHAnimationMaskNone

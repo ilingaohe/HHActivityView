@@ -213,6 +213,7 @@
 {
   [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleDeviceOrientationChangeNotification:) name:UIDeviceOrientationDidChangeNotification object:nil];
+  [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleActivityViewDismissNotification:) name:NOTIFICATION_OF_AVTIVITY_VIEW_DISMISS object:nil];
 }
 - (void)removeNotification
 {
@@ -239,5 +240,9 @@
     //
     [self dismissViewAnimated:NO];
   }
+}
+- (void)handleActivityViewDismissNotification:(NSNotification *)notification
+{
+  [self dismissViewAnimated:NO];
 }
 @end
