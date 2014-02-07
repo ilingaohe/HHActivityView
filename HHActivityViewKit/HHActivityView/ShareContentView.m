@@ -56,14 +56,14 @@
 }
 - (UIScrollView *)productContainerView
 {
-//  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-//    //iOS7.0及以上系统，使用单行布局
-//    return [self productContainerViewWithFlowLayout];
-//  }else{
-//    //iOS7.0之前的系统，使用九宫格布局
-//    return [self productContainerViewWithGridLayout];
-//  }
-  return [self productContainerViewWithGridLayout];
+  if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+    //iOS7.0及以上系统，使用单行布局
+    return [self productContainerViewWithFlowLayout];
+  }else{
+    //iOS7.0之前的系统，使用九宫格布局
+    return [self productContainerViewWithGridLayout];
+  }
+//  return [self productContainerViewWithGridLayout];
 }
 - (UIScrollView *)productContainerViewWithFlowLayout
 {

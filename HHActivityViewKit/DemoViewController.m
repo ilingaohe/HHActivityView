@@ -51,18 +51,26 @@
   bgImageView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
   [self.view addSubview:bgImageView];
   //
-  UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-  btn.frame = CGRectMake(100, 100, 120, 60);
-  btn.backgroundColor = [UIColor redColor];
-  [btn addTarget:self action:@selector(handleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-  [self.view addSubview:btn];
+  UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+  shareBtn.frame = CGRectMake(0, 0, 140, 80);
+  [shareBtn setBackgroundColor:[UIColor redColor]];
+  [shareBtn setImage:[UIImage imageNamed:@"share_icon_normal"] forState:UIControlStateNormal];
+  [shareBtn setImage:[UIImage imageNamed:@"share_icon_pressed"] forState:UIControlStateHighlighted];
+  [shareBtn setTitle:@"Share" forState:UIControlStateNormal];
+  [shareBtn addTarget:self action:@selector(handleBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+  [self.view addSubview:shareBtn];
+  //AutoLayout
+  [shareBtn setTranslatesAutoresizingMaskIntoConstraints:NO];
+  NSLayoutConstraint *centerYContraint = [NSLayoutConstraint constraintWithItem:shareBtn attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:[shareBtn superview] attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0];
+  NSLayoutConstraint *centerXContraint = [NSLayoutConstraint constraintWithItem:shareBtn attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:[shareBtn superview] attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0];
+  [[shareBtn superview] addConstraints:@[centerYContraint,centerXContraint]];
 }
 - (UIImage *)fetchImageAtIndex:(NSUInteger)index
 {
-  UIImage *image = [UIImage imageNamed:@"share_netdisk"];
+  UIImage *image = [UIImage imageNamed:@"share_apple"];
   switch (index) {
     case 0:
-      image = [UIImage imageNamed:@"share_netdisk"];
+      image = [UIImage imageNamed:@"share_apple"];
       break;
     case 1:
       image = [UIImage imageNamed:@"share_link"];
@@ -100,7 +108,7 @@
   for (int index=0; index<9; index++) {
     ShareItemCell *itemOne = [[ShareItemCell alloc] initWithImage:[self fetchImageAtIndex:index] title:[NSString stringWithFormat:@"%d",index]];
     itemOne.shareAction = ^{
-      NSLog(@"%d",index);
+      NSLog(@"Choose:%d",index);
     };
     [shareItemCells addObject:itemOne];
   }
